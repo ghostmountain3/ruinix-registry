@@ -1,0 +1,121 @@
+version: 1
+updated_at: "2026-05-14"
+
+models:
+  - id: qwen2.5-coder:1.5b-mlx-4bit
+    display_name: Qwen2.5 Coder 1.5B MLX 4-bit
+    description: Compact coding model for Apple Silicon.
+    source:
+      type: huggingface
+      repo: mlx-community/Qwen2.5-Coder-1.5B-Instruct-4bit
+      revision: main
+    format: mlx
+    backend: mlx
+    family: qwen2
+    architecture: qwen2
+    quantization: 4bit
+    recommended_tier: compact
+    context_window: 4096
+    max_output_tokens: 1024
+    default_preset: code_precise
+    tokenizer_path_expectation: tokenizer.json
+    chat_template: qwen_chatml
+    stop_strings:
+      - <|im_end|>
+    compatibility: supported
+    role: coder
+    tags:
+      - coding
+      - apple-silicon
+      - compact
+      - mlx
+    expected_files:
+      - config.json
+      - tokenizer.json
+      - tokenizer_config.json
+      - model.safetensors
+
+  - id: qwen2.5-coder:1.5b-gguf-q4
+    display_name: Qwen2.5 Coder 1.5B GGUF Q4
+    description: Compact Qwen coder model for the GGUF/llama.cpp compatibility path.
+    source:
+      type: huggingface
+      repo: Qwen/Qwen2.5-Coder-1.5B-Instruct-GGUF
+      filename: qwen2.5-coder-1.5b-instruct-q4_k_m.gguf
+      revision: main
+    format: gguf
+    backend: llamacpp
+    family: qwen2
+    architecture: qwen2
+    quantization: Q4_K_M
+    recommended_tier: compact
+    context_window: 4096
+    max_output_tokens: 1024
+    default_preset: code_precise
+    compatibility: experimental
+    role: coder
+    tags:
+      - coding
+      - gguf
+      - compact
+      - llamacpp
+    expected_files:
+      - qwen2.5-coder-1.5b-instruct-q4_k_m.gguf
+
+  - id: deepseek-r1-qwen3:8b-mlx-4bit
+    display_name: DeepSeek R1 Qwen3 8B MLX 4-bit
+    description: Experimental reasoning model for larger Apple Silicon machines.
+    source:
+      type: huggingface
+      repo: lmstudio-community/DeepSeek-R1-0528-Qwen3-8B-MLX-4bit
+      revision: main
+    format: mlx
+    backend: mlx
+    family: qwen3
+    architecture: qwen3
+    quantization: 4bit
+    recommended_tier: large
+    context_window: 4096
+    max_output_tokens: 1024
+    default_preset: code_balanced
+    tokenizer_path_expectation: tokenizer.json
+    chat_template: deepseek_qwen3
+    stop_strings:
+      - <|im_end|>
+    compatibility: experimental
+    tags:
+      - reasoning
+      - apple-silicon
+      - experimental
+      - mlx
+    expected_files:
+      - config.json
+      - tokenizer.json
+      - tokenizer_config.json
+      - model.safetensors
+
+  - id: gemma:2b-gguf-q4
+    display_name: Gemma 2 2B Instruct GGUF Q4_K_M
+    description: Small Gemma-family GGUF model for compatibility inspection and llama.cpp routing.
+    source:
+      type: huggingface
+      repo: lmstudio-community/gemma-2-2b-it-GGUF
+      filename: gemma-2-2b-it-Q4_K_M.gguf
+      revision: main
+    format: gguf
+    backend: llamacpp
+    family: gemma
+    architecture: gemma
+    quantization: Q4_K_M
+    recommended_tier: compact
+    context_window: 4096
+    max_output_tokens: 1024
+    default_preset: code_balanced
+    compatibility: experimental
+    tags:
+      - gguf
+      - compact
+      - compatibility
+      - llamacpp
+    expected_files:
+      - gemma-2-2b-it-Q4_K_M.gguf
